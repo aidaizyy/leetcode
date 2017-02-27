@@ -19,16 +19,17 @@ struct TreeNode {
 
 class Solution {
 public:
+    TreeNode* sortedPart(vector<int> nums, int left, int right) {
+        if (left > right)
+            return nullptr;
+        int mid = left + (right - left) / 2;
+        TreeNode* root = new TreeNode(nums[mid]);
+        root->left = sortedPart(nums, left, mid - 1);
+        root->right = sortedPart(nums, mid + 1, right);
+        return root;
+    }
     TreeNode* sortedArrayToBST(vector<int>& nums) {
-        int size = (int)nums.size();
-        int level = 0;
-        for (int i=1; ; ++i) {
-            if (size >= (i-1) * (i-1) && size <= i * i) {
-                level = i;
-                break;
-            }
-        }
-        
+        return sortedPart(nums, 0, nums.size()-1);
     }
 };
 
