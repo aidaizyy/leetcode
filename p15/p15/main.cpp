@@ -141,11 +141,11 @@ public:
         
         //112ms
         vector<vector<int>> res;
-        if (nums.size() <= 2)
+        int size = (int)nums.size();
+        if (size <= 2)
             return res;
         sort(nums.begin(), nums.end());
         const int target = 0;
-        int size = (int)nums.size();
         for (int i=0; i<size-2; ++i) {
             if (i > 0 && nums[i] == nums[i-1])
                 continue;
