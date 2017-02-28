@@ -19,17 +19,29 @@ struct TreeNode {
 
 class Solution {
 public:
-    TreeNode* sortedPart(vector<int> nums, int left, int right) {
+    TreeNode* sortedArrayToBST(vector<int> nums, int left, int right) {
         if (left > right)
             return nullptr;
         int mid = left + (right - left) / 2;
         TreeNode* root = new TreeNode(nums[mid]);
-        root->left = sortedPart(nums, left, mid - 1);
-        root->right = sortedPart(nums, mid + 1, right);
+        root->left = sortedArrayToBST(nums, left, mid - 1);
+        root->right = sortedArrayToBST(nums, mid + 1, right);
         return root;
     }
+    
+    TreeNode* sortedArrayToBST(vector<int>::iterator left, vector<int>::iterator right) {
+        if (left >= right)
+            return nullptr;
+        vector<int>::iterator mid = left + (right - left) / 2;
+        TreeNode* root = new TreeNode(*mid);
+        root->left = sortedArrayToBST(left, mid);
+        root->right = sortedArrayToBST(mid + 1, right);
+        return root;
+    }
+    
     TreeNode* sortedArrayToBST(vector<int>& nums) {
-        return sortedPart(nums, 0, nums.size()-1);
+        //return sortedPart(nums, 0, nums.size()-1);
+        return sortedArrayToBST(nums.begin(), nums.end());
     }
 };
 
