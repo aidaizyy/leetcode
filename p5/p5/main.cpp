@@ -7,9 +7,16 @@
 //
 
 #include <iostream>
+using namespace std;
+
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        
+    }
+};
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    Solution s;
     return 0;
 }
