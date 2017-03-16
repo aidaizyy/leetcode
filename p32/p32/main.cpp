@@ -52,9 +52,7 @@ public:
         len[0] = 0;
         len[1] = 0;
         for (int i=1; i<size; ++i) {
-            if (s[i] == '(')
-                len[i+1] = 0;
-            else {
+            if (s[i] == ')') {
                 if (s[i-1] == '(')
                     len[i+1] = len[i-1] + 2;
                 else if (i-len[i]-1 >=0 && s[i-len[i]-1] == '(')
