@@ -14,7 +14,7 @@ class Solution {
 public:
     
     /*
-    //56ms
+    //12ms
     void solveSudoku(vector<vector<char>>& board) {
         vector<bool> temple(10, false);
         vector<vector<bool>> horizontal(9, temple);
