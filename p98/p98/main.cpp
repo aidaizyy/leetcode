@@ -8,8 +8,30 @@
 
 #include <iostream>
 
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+class Solution {
+public:
+    bool isValidBST(TreeNode* root) {
+        return isValidBST(root, -1, -1);
+    }
+    bool isValidBST(TreeNode* node, int min, int max) {
+        if (node == nullptr)
+            return true;
+        if (min != -1 && node->val <= min)
+            return false;
+        if (max != - 1 && node->val >= max)
+            return false;
+        return isValidBST(node->left, min, node->val) && isValidBST(node->right, node->val, max);
+    }
+};
+
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    Solution s;
     return 0;
 }
