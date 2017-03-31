@@ -38,7 +38,7 @@ public:
         }
         return res;
     }
-    bool isVaild(string s) {
+    bool isValid(string s) {
         int n = (int)s.size();
         if (n == 0 || n > 3)
             return false;
