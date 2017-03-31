@@ -18,15 +18,15 @@ public:
         if (n < 4 || n > 12)
             return res;
         for (int i = 1; i <= min(n - 3, 3); ++i) {
-            if (!isVaild(s.substr(0, i)))
+            if (!isValid(s.substr(0, i)))
                 continue;
             for (int j = i + 1; j <= min(n - 2, i + 3); ++j) {
-                if (!isVaild(s.substr(i, j - i)))
+                if (!isValid(s.substr(i, j - i)))
                     continue;
                 for (int k = j + 1; k <= min(n - 1, j + 3); ++k) {
-                    if (!isVaild(s.substr(j, k - j)))
+                    if (!isValid(s.substr(j, k - j)))
                         continue;
-                    if (!isVaild(s.substr(k, n - k)))
+                    if (!isValid(s.substr(k, n - k)))
                         continue;
                     string t = s;
                     t.insert(i, ".");
