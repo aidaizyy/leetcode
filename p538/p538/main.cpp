@@ -8,8 +8,32 @@
 
 #include <iostream>
 
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+class Solution {
+public:
+    TreeNode* convertBST(TreeNode* root) {
+        int sum = 0;
+        TreeNode* node = root;
+        helper(sum, node);
+        return root;
+    }
+    void helper(int& sum, TreeNode* node) {
+        if (node == nullptr)
+            return ;
+        helper(sum, node->right);
+        node->val += sum;
+        sum = node->val;
+        helper(sum, node->left);
+    }
+};
+
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    Solution s;
     return 0;
 }
