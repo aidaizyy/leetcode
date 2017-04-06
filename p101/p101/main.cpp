@@ -21,24 +21,23 @@ public:
     bool isSymmetric(TreeNode* root) {
         if (root == nullptr)
             return true;
-        string str1 = travle(root->left, 1);
-        string str2 = travle(root->right, 2);
+        string str1 = travel(root->left, 1);
+        string str2 = travel(root->right, 2);
         if (str1 == str2)
             return true;
         else
             return false;
     }
-    
-    string travle(TreeNode* node, int direction) {
+    string travel(TreeNode* node, int direction) {
         string res = "*";
         if (node == nullptr)
             return res;
         if (direction == 1) {
-            res += travle(node->left, direction);
-            res += travle(node->right, direction);
+            res += travel(node->left, direction);
+            res += travel(node->right, direction);
         } else {
-            res += travle(node->right, direction);
-            res += travle(node->left, direction);
+            res += travel(node->right, direction);
+            res += travel(node->left, direction);
         }
         res += node->val;
         return res;

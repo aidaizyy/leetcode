@@ -19,20 +19,20 @@ struct TreeNode {
 
 class Solution {
 public:
-    void trave(TreeNode* node, int height, vector<vector<int>>& res) {
+    void travel(TreeNode* node, int height, vector<vector<int>>& res) {
         if (node == nullptr)
             return ;
         if (res.size() < height) {
             vector<int> v;
             res.push_back(v);
         }
-        trave(node->left, height+1, res);
-        trave(node->right, height+1, res);
+        travel(node->left, height+1, res);
+        travel(node->right, height+1, res);
         res[height-1].push_back(node->val);
     }
     vector<vector<int>> levelOrder(TreeNode* root) {
         vector<vector<int>> res;
-        trave(root, 1, res);
+        travel(root, 1, res);
         return res;
     }
 };
