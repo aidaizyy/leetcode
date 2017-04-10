@@ -29,9 +29,7 @@ public:
                     tmp *= 10;
                     tmp += s[i] - '0';
                 }
-                if (s[0] == '-')
-                    tmp *= -1;
-                st.push(tmp);
+                st.push(-tmp);
             } else {
                 int y = st.top();
                 st.pop();
