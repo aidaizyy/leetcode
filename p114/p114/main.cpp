@@ -21,12 +21,13 @@ public:
         TreeNode* node = root;
         while (node != nullptr) {
             TreeNode* l = node->left;
+            TreeNode* r = node->right;
             node->left = nullptr;
             flatten(l, node);
-            node = node->right;
+            node = r;
         }
     }
-    void flatten(TreeNode* node, TreeNode*& prev) {
+    void flatten(TreeNode* node, TreeNode* prev) {
         if (node == nullptr)
             return ;
         TreeNode* l = node->left;
