@@ -13,44 +13,6 @@
 #include <unordered_set>
 using namespace std;
 
-/*
-class Solution {
-public:
-    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
-        if (find(wordList.begin(), wordList.end(), endWord) == wordList.end())
-            return 0;
-        vector<bool> exist(wordList.size(), false);
-        int res = INT_MAX;
-        ladderLength(beginWord, endWord, wordList, exist, 2, res);
-        return res == INT_MAX ? 0 : res;
-    }
-    void ladderLength(string beginWord, string endWord, vector<string>& wordList, vector<bool>& exist, int length, int& res) {
-        if (length > res)
-            return ;
-        for (int i = 0; i < wordList.size(); ++i) {
-            if (exist[i])
-                continue;
-            int counts = 0;
-            for (int j = 0; j < beginWord.size(); ++j) {
-                if (beginWord[j] != wordList[i][j])
-                    ++counts;
-                if (counts > 1)
-                    break;
-            }
-            if (counts == 1) {
-                if (wordList[i] == endWord) {
-                    res = min(res, length);
-                    continue ;
-                }
-                exist[i] = true;
-                ladderLength(wordList[i], endWord, wordList, exist, length + 1, res);
-                exist[i] = false;
-            }
-        }
-    }
-};
- */
-
 class Solution {
 public:
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
