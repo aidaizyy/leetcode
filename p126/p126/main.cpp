@@ -15,42 +15,34 @@ using namespace std;
 class Solution {
 public:
     vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
-        vector<vector<string>> path;
+        vector<vector<string>> res;
         unordered_set<string> set;
         for (string str : wordList)
             set.insert(str);
         if (set.find(endWord) == set.end())
-            return path;
+            return res;
         int minStep = INT_MAX;
         int step = 1;
         queue<string> queue;
         queue.push(beginWord);
-        vector<string> tmp;
-        tmp.push_back(beginWord);
-        path.push_back(tmp);
+        vector<vector<string>> path;
+        path.push_back(vector<string>{beginWord});
         while (!queue.empty() && step <= minStep) {
+            path.push_back({});
             int num = (int)queue.size();
-            int pathNum = path.size();
             for (int k = 0; k < num; ++k) {
                 string str = queue.front();
-                if (str == endWord)
-                    minStep = step;
                 queue.pop();
-                string last = str;
                 for (int i = 0; i < beginWord.size(); ++i) {
                     char ch = str[i];
                     for (int j = 0; j < 26; ++j) {
                         str[i] = 'a' + j;
-                        if (set.find(str) != set.end() && str != last) {
+                        if (set.find(str) != set.end()) {
+                            if (str == endWord)
+                                minStep = step;
                             queue.push(str);
-                            for (int p = 0; p < pathNum; ++p) {
-                                if (path[p].back() == last) {
-                                    tmp = path[p];
-                                    tmp.push_back(str);
-                                    if (find(path.begin(), path.end(), tmp) == path.end())
-                                        path.push_back(tmp);
-                                }
-                            }
+                            set.erase(str);
+                            path[step].push_back(str);
                         }
                     }
                     str[i] = ch;
@@ -58,12 +50,34 @@ public:
             }
             ++step;
         }
-        vector<vector<string>> res;
-        for (int i = 0; i < path.size(); ++i) {
-            if (path[i].back() == endWord && path[i].size() == minStep)
-                res.push_back(path[i]);
+        vector<string> tmp;
+        res.push_back(vector<string>{endWord});
+        for (int i = (int)path.size() - 2; i >= 0; --i) {
+            int resNum = (int)res.size();
+            for (int j = 0; j < resNum; ++j) {
+                for (int k = 0; k < path[i].size(); ++k) {
+                    if (canTransform(res[j].back(), path[i][k])) {
+                        tmp = res[j];
+                        tmp.push_back(path[i][k]);
+                        res.push_back(tmp);
+                    }
+                }
+            }
+            res.erase(res.begin(), res.begin() + resNum);
         }
+        for (vector<string>& vs : res)
+            reverse(vs.begin(), vs.end());
         return res;
+    }
+    bool canTransform(string& s, string& t) {
+        int counts = 0;
+        for (int i = 0; i < s.size(); ++i) {
+            if (s[i] != t[i])
+                ++counts;
+            if (counts > 1)
+                break;
+        }
+        return counts == 1;
     }
 };
 
