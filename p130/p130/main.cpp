@@ -18,7 +18,6 @@ public:
         if (m == 0)
             return ;
         int n = (int)board[0].size();
-        vector<vector<bool>> exist(m, vector<bool>(n, true));
         queue<int> queue;
         for (int j = 0; j < n; ++j)
             if (board[0][j] == 'O')
@@ -39,9 +38,9 @@ public:
                 continue;
             int i = tmp / n;
             int j = tmp % n;
-            if (board[i][j] == 'X' || !exist[i][j])
+            if (board[i][j] != 'O')
                 continue;
-            exist[i][j] = false;
+            board[i][j] = 'T';
             queue.push(tmp + 1);
             queue.push(tmp - 1);
             queue.push(tmp - n);
@@ -49,8 +48,10 @@ public:
         }
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
-                if (exist[i][j] && board[i][j] == 'O')
+                if (board[i][j] == 'O')
                     board[i][j] = 'X';
+                if (board[i][j] == 'T')
+                    board[i][j] = 'O';
             }
         }
     }
