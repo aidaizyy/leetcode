@@ -34,17 +34,19 @@ public:
         while (!queue.empty()) {
             int tmp = queue.front();
             queue.pop();
-            if (tmp < 0 || tmp >= m * n)
-                continue;
             int i = tmp / n;
             int j = tmp % n;
             if (board[i][j] != 'O')
                 continue;
             board[i][j] = 'T';
-            queue.push(tmp + 1);
-            queue.push(tmp - 1);
-            queue.push(tmp - n);
-            queue.push(tmp + n);
+            if (j != 0)
+                queue.push(tmp - 1);
+            if (j != n - 1)
+                queue.push(tmp + 1);
+            if (i != 0)
+                queue.push(tmp - n);
+            if (i != m - 1)
+                queue.push(tmp + n);
         }
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
