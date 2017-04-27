@@ -17,6 +17,7 @@ public:
     int maximumGap(vector<int>& nums) {
         
         /*
+        //9ms O(nlogn)
         set<int> myset;
         for (int num : nums)
             myset.insert(num);
@@ -32,6 +33,7 @@ public:
         return res;
         */
         
+        //6ms O(n)
         if (nums.size() <= 1)
             return 0;
         int minimum = INT_MAX;
