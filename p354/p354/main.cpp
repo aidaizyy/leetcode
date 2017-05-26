@@ -26,7 +26,7 @@ public:
             auto it = lower_bound(res.begin(), res.end(), envelopes[i].second);
             if (it == res.end())
                 res.push_back(envelopes[i].second);
-            else if (envelopes[i].second < *it)
+            else
                 *it = envelopes[i].second;
         }
         return (int)res.size();
